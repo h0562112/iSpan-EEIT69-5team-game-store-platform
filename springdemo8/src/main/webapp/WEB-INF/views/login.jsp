@@ -29,8 +29,112 @@
 }
 
 .google-login-btn {
-    margin-top: -30px;  
+    margin-top: -30px;
 }
+
+/* ===== 登入頁整體置中 (覆蓋 Webflow 寫死的位移) ===== */
+.login-page .pagopy-15copy { padding-bottom: 0; margin-bottom: 0; }
+.login-page .f-section-large-3-copy-copy {
+    margin: 0;
+    padding: 48px 5% 56px;
+    box-shadow: none;
+}
+.login-page .f-container-x-small-2 {
+    max-width: 440px;
+    margin: 0 auto;
+}
+.login-page .f-margin-bottom-60 { margin-bottom: 28px; }
+.login-page .f-margin-bottom-58 { margin-bottom: 0; }
+.login-page .f-title-wrapper-left-2 { max-width: none; text-align: center; }
+.login-page .f-h3-heading-3-copy {
+    width: auto;
+    margin: 0;
+    transform: none;
+    text-align: center;
+}
+.login-page .form-block-2 { margin: 0; }
+.login-page .f-contact-form-3 { margin: 0; transform: none; }
+.login-page .f-contact-form-grid-2 {
+    display: block;
+    margin: 0 0 8px;
+    transform: none;
+}
+.login-page .f-contact-form-grid-2 > div:empty { display: none; }
+.login-page .f-contact-form-grid-2 > div { margin-bottom: 16px; }
+.login-page .f-field-label-4 { display: block; transform: none; }
+.login-page .f-field-input-4 {
+    width: 100%;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+.login-page .error-message { text-align: center; margin: 0 0 8px; }
+
+/* 登入 + Google 按鈕同一排 */
+.login-page .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+.login-page .button-container .f-button-neutral-4,
+.login-page .button-container .f-button-neutral-4:hover {
+    transform: none;
+    box-shadow: none;
+}
+.login-page .button-container .f-button-neutral-4 {
+    margin: 0;
+    height: 46px;
+    min-height: 0;
+    padding: 0 32px;
+    line-height: 46px;
+    box-sizing: border-box;
+}
+.login-page .google-login-btn {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+}
+.login-page .google-login-btn img { height: 46px; width: auto; display: block; }
+
+/* 粉紅色「尚未擁有帳號」區塊 */
+.login-page .div-block-76-copy {
+    max-width: 440px;
+    margin: 32px auto 0;
+    padding: 20px;
+    border-radius: 12px;
+}
+.login-page .div-block-80 {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+.login-page .text-block-19 {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.login-page .button-82 { margin: 0; }
+
+/* 頁尾 */
+.login-page .foot1111-copy { margin-top: 0; transform: none; }
+.login-page .footer-bottom-2 {
+    max-width: 940px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.login-page .footer-social-link-2 { margin-left: 0; }
+.login-page .footer-social-link-2 img { width: 48px; height: 48px; object-fit: contain; }
+.login-page .footer-social-block-two { margin-left: 0; }
 	</style>
   <title>登入</title>
   <meta content="Free Webflow ecommerce template for your business. Enjoy colorful design, add your products, mix components and build your own online shop!" name="description">
@@ -53,7 +157,7 @@
   <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="../images/webclip.png" rel="apple-touch-icon">
 </head>
-<body>
+<body class="login-page">
   <div class="preloader">
     <div class="loading-icon"><img src="../images/preloader.gif" alt="" class="preloader-icon"></div>
   </div>

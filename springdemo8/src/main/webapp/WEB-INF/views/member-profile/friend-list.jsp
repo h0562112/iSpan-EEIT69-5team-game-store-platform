@@ -505,7 +505,7 @@
     </div>
     
     <script>
-    	var basePath="http://10.0.101.88:8080"
+    	var basePath=location.origin
 	</script>
 	<script>
 	//我方跟對方ID
@@ -788,13 +788,13 @@
             var user = user1;
             try {
                 //创建Websocket连接,ws开头的地址是后台Websocket服务器地址
-                //returnCitySN["cip"]获取ip地址
-                ws = new WebSocket("ws://10.0.101.88:8080/websocket/" + user+"/"+returnCitySN["cip"]);//连接服务器
+                //(typeof returnCitySN!=="undefined"?returnCitySN["cip"]:"127.0.0.1")获取ip地址
+                ws = new WebSocket((location.protocol==="https:"?"wss://":"ws://")+location.host+"/websocket/" + user+"/"+(typeof returnCitySN!=="undefined"?returnCitySN["cip"]:"127.0.0.1"));//连接服务器
                 
                 var user = user1; // 將 "your_username" 替換為實際的使用者名稱
-                var cip = returnCitySN["cip"]; // 假設 returnCitySN["cip"] 包含IP地址
+                var cip = (typeof returnCitySN!=="undefined"?returnCitySN["cip"]:"127.0.0.1"); // 假設 (typeof returnCitySN!=="undefined"?returnCitySN["cip"]:"127.0.0.1") 包含IP地址
 
-                var url = "ws://10.0.101.88:8080/websocket/" + user + "/" + cip; // 建立WebSocket URL
+                var url = (location.protocol==="https:"?"wss://":"ws://")+location.host+"/websocket/" + user + "/" + cip; // 建立WebSocket URL
 
                 console.log("WebSocket URL:", url); // 輸出URL到控制台
 

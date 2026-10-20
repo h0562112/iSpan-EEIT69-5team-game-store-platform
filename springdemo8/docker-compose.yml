@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    # 讀取 .env 的 DB_URL、DB_PASSWORD、GOOGLE_*、MAIL_* (見 .env.example)
+    env_file:
+      - .env
+    restart: unless-stopped

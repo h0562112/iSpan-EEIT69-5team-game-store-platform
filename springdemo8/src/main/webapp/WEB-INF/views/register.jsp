@@ -13,6 +13,84 @@
 .error {
 	color: red
 }
+
+/* ===== 註冊頁整體置中 (覆蓋 Webflow 寫死的位移) ===== */
+.register-page .f-section-large-2-co28py-copy {
+    margin-bottom: 0;
+    padding: 48px 5% 56px;
+}
+.register-page .container-29 {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 0;
+}
+.register-page .heading-27-copy {
+    margin: 0 0 28px;
+    padding: 0;
+    text-align: center;
+}
+.register-page .f-container-x-small { max-width: 440px; margin: 0 auto; }
+.register-page .f-margin-bottom-56 { margin: 0; }
+.register-page .f-title-wrapper-left { display: none; }
+.register-page .w-form { margin: 0; }
+.register-page .f-contact-form-2 { margin: 0; transform: none; }
+.register-page .f-contact-form-grid {
+    display: block;
+    margin: 0 0 8px;
+    transform: none;
+}
+.register-page .f-contact-form-grid > div { margin-bottom: 16px; }
+.register-page .f-field-label-3 { display: block; }
+.register-page .f-field-input-3 {
+    width: 100%;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+.register-page .f-contact-submit-wrapper {
+    justify-content: center;
+    margin-top: 12px;
+}
+.register-page .f-contact-divider { display: none; }
+.register-page .f-button-neutral-3 {
+    height: 46px;
+    min-height: 0;
+    padding: 0 40px;
+    margin: 0;
+    line-height: 46px;
+    box-sizing: border-box;
+}
+
+/* 底部「已經擁有帳號?」 */
+.register-page .section-12316-copy-copy {
+    max-width: 440px;
+    margin: 32px auto 0;
+    padding: 20px;
+    border-radius: 12px;
+}
+.register-page .container-2288-copy {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+.register-page .paragraph-11 { width: 100%; margin: 0; padding: 0; text-align: center; }
+.register-page .button-79 { margin: 0; }
+
+/* 頁尾 */
+.register-page .footer-light-05185-copy-copy { margin-top: 0; transform: none; }
+.register-page .footer-bottom-2 {
+    max-width: 940px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.register-page .footer-social-link-2 { margin-left: 0; }
+.register-page .footer-social-link-2 img { width: 48px; height: 48px; object-fit: contain; }
+.register-page .footer-social-block-two { margin-left: 0; }
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
@@ -57,7 +135,7 @@
   <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="../images/webclip.png" rel="apple-touch-icon">
 </head>
-<body>
+<body class="register-page">
   <div class="preloader">
     <div class="loading-icon"><img src="../images/preloader.gif" alt="" class="preloader-icon"></div>
   </div>

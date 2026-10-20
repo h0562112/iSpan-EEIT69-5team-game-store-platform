@@ -60,8 +60,8 @@ public class ItemController {
 		itemsByCategory1 = itemRepository.findByItemStockLessThanOrderByItemStockAsc(50); // 熱門商品
 		itemsByCategory2 = itemRepository.findByDiscountIsNotNullOrderByDiscountDesc(); // 優惠商品
 
-		model.addAttribute("items1", itemsByCategory1.subList(0, 4));
-        model.addAttribute("items2", itemsByCategory2.subList(0, 4));
+		model.addAttribute("items1", itemsByCategory1.subList(0, Math.min(4, itemsByCategory1.size())));
+        model.addAttribute("items2", itemsByCategory2.subList(0, Math.min(4, itemsByCategory2.size())));
 
 		
 		return "index";

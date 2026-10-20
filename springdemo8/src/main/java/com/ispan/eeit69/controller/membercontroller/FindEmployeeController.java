@@ -344,7 +344,7 @@ public class FindEmployeeController {
 //	}
 		
 	@PostMapping("/updateEmployee.do")
-	public String updateEmployee(@ModelAttribute User updatedUser, @RequestParam("file") MultipartFile file) throws SQLException, IOException {
+	public String updateEmployee(@ModelAttribute User updatedUser, @RequestParam("file") MultipartFile file, javax.servlet.http.HttpSession session) throws SQLException, IOException {
 	    // 获取原始员工信息
 	    System.out.println("更新用户信息:" + updatedUser);
 
@@ -379,6 +379,9 @@ public class FindEmployeeController {
 
 	            // 保存 Avatar
 	            avatarService.saveOrUpdateAvatar(avatar);
+
+	            // 同步更新導覽列顯示的頭像 (登入時才寫入 session，這裡要一起更新)
+	            session.setAttribute("itemPictureBase64", base64Encoded);
 	        }
 	    }
 	    return "redirect:/findEmployee.do?id=" + updatedUser.getId() + "&userId=" + updatedUser.getId(); // 重定向到员工列表页面

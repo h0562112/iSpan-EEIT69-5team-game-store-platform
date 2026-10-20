@@ -1,0 +1,13 @@
+target/
+.git
+.gitignore
+.idea
+.vscode
+.classpath
+.project
+.settings
+HELP.md
+# 機密設定不要打包進 image，改用環境變數傳入
+.env
+Dockerfile
+docker-compose.yml

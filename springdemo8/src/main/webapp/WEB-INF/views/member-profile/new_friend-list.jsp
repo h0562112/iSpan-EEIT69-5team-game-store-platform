@@ -322,7 +322,7 @@
 	</div>
                     
                     <script>
-					    var basePath="http://10.0.101.88:8080"
+					    var basePath=location.origin
 					</script>
                     
                     	<script>
@@ -464,8 +464,8 @@
 			            var user = user1;
 			            try {
 			                //创建Websocket连接,ws开头的地址是后台Websocket服务器地址
-			                //returnCitySN["cip"]获取ip地址
-			                ws = new WebSocket("ws://10.0.101.88:8080/websocket/" + user+"/"+returnCitySN["cip"]);//连接服务器
+			                //(typeof returnCitySN!=="undefined"?returnCitySN["cip"]:"127.0.0.1")获取ip地址
+			                ws = new WebSocket((location.protocol==="https:"?"wss://":"ws://")+location.host+"/websocket/" + user+"/"+(typeof returnCitySN!=="undefined"?returnCitySN["cip"]:"127.0.0.1"));//连接服务器
 			                //socket打开事件
 			                ws.onopen = function (event) {
 			                    console.log("已经与服务器建立了连接...");

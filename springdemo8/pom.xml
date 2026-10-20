@@ -12,6 +12,7 @@
 	<groupId>com.ispan.eeit69</groupId>
 	<artifactId>springdemo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>springdemo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
