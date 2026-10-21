@@ -15,6 +15,11 @@ public interface FriendRepository extends JpaRepository<Friends, Long> {
 
     List<Friends> findByUserID1(Integer userID1);
 
+    Friends findFirstByUserID1AndUserID2(Integer userID1, Integer userID2);
+
+    /** 別人寄給我、尚未處理的邀請 */
+    List<Friends> findByUserID2AndStatus(Integer userID2, String status);
+
     @Transactional
     void deleteByUserID1AndUserID2(Integer userID1, Integer userID2);
 

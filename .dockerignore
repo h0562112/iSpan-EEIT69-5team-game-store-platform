@@ -7,7 +7,6 @@ target/
 .project
 .settings
 HELP.md
-# 機密設定不要打包進 image，改用環境變數傳入
-.env
+# .env 由 Dockerfile 打包進 image，所以不能列在這裡排除
 Dockerfile
 docker-compose.yml

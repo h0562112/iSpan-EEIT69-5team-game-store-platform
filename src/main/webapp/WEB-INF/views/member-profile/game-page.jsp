@@ -50,7 +50,7 @@
               </nav>
             </div>
             <a href="topup.html" class="nav-link w-nav-link">點數商店</a>
-            <a href="account-details/news-copy-2.html" class="nav-link w-nav-link">消息新聞</a>
+            <a href="/news" class="nav-link w-nav-link">消息新聞</a>
             <div><img src="images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview.png" loading="lazy" width="68" sizes="(max-width: 991px) 100vw, (max-width: 1439px) 5vw, 67.99715423583984px" alt="" srcset="images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview-p-500.png 500w, images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview.png 552w"></div>
             <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
               <div class="dropdown-toggle w-dropdown-toggle">
@@ -61,8 +61,8 @@
                 <a href="/findEmployee.do?id=${sessionScope.myUser.id}&userId=${sessionScope.myUser.id}" class="dropdown-link w-dropdown-link">個人資料</a>
                 <a href="/findfriendsid?id=${sessionScope.myUser.id}" class="dropdown-link-2 w-dropdown-link">好友</a>
                 <a href="/findPlayergameid?id=${sessionScope.myUser.id}" class="dropdown-link-3 w-dropdown-link">遊戲庫</a>
-                <a href="account-details/coupon.html" class="dropdown-link-4 w-dropdown-link">我的優惠卷</a>
-                <a href="account-details/viewpurchasehistory.html" class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
+                <a href="/coupon" class="dropdown-link-4 w-dropdown-link">我的優惠卷</a>
+                <a href="/orders" class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
               </nav>
             </div>
             <sec:authorize access="isAuthenticated()">

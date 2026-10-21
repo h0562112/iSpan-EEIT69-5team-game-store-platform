@@ -90,7 +90,7 @@
 								</nav>
 							</div>
 							<a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a> <a
-								href="account-details/news-copy-2.html"
+								href="/news"
 								class="nav-link w-nav-link">消息新聞</a>
 							<div>
 								<img
@@ -116,9 +116,9 @@
 									class="dropdown-link-2 w-dropdown-link">好友</a>  <a
 									href="/findPlayergameid?id=${sessionScope.myUser.id}"
 									class="dropdown-link-3 w-dropdown-link">遊戲庫</a> <a
-									href="account-details/coupon.html"
+									href="/coupon"
 									class="dropdown-link-4 w-dropdown-link">我的優惠卷</a> <a
-									href="account-details/viewpurchasehistory.html"
+									href="/orders"
 									class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
 							</nav>
 							</div>
@@ -606,7 +606,7 @@
 							</nav>
 						</div>
 						<a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a> <a
-							href="account-details/news-copy-2.html"
+							href="/news"
 							class="nav-link w-nav-link">消息新聞</a>
 						<div>
 							<img
@@ -631,9 +631,9 @@
 									class="dropdown-link-2 w-dropdown-link">好友</a>  <a
 									href="/findPlayergameid?id=${sessionScope.myUser.id}"
 									class="dropdown-link-3 w-dropdown-link">遊戲庫</a> <a
-									href="account-details/coupon.html"
+									href="/coupon"
 									class="dropdown-link-4 w-dropdown-link">我的優惠卷</a> <a
-									href="account-details/viewpurchasehistory.html"
+									href="/orders"
 									class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
 							</nav>
 						</div>
@@ -819,7 +819,7 @@
 							</nav>
 						</div>
 						<a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a> <a
-							href="account-details/news-copy-2.html"
+							href="/news"
 							class="nav-link w-nav-link">消息新聞</a>
 						<div>
 							<img
@@ -844,9 +844,9 @@
 									class="dropdown-link-2 w-dropdown-link">好友</a>  <a
 									href="/findPlayergameid?id=${sessionScope.myUser.id}"
 									class="dropdown-link-3 w-dropdown-link">遊戲庫</a> <a
-									href="account-details/coupon.html"
+									href="/coupon"
 									class="dropdown-link-4 w-dropdown-link">我的優惠卷</a> <a
-									href="account-details/viewpurchasehistory.html"
+									href="/orders"
 									class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
 							</nav>
 						</div>
@@ -1032,7 +1032,7 @@
 							</nav>
 						</div>
 						<a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a> <a
-							href="account-details/news-copy-2.html"
+							href="/news"
 							class="nav-link w-nav-link">消息新聞</a>
 						<div>
 						
@@ -1082,9 +1082,9 @@
 									class="dropdown-link-2 w-dropdown-link">好友</a>  <a
 									href="/findPlayergameid?id=${sessionScope.myUser.id}"
 									class="dropdown-link-3 w-dropdown-link">遊戲庫</a> <a
-									href="account-details/coupon.html"
+									href="/coupon"
 									class="dropdown-link-4 w-dropdown-link">我的優惠卷</a> <a
-									href="account-details/viewpurchasehistory.html"
+									href="/orders"
 									class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
 							</nav>
 						</div>

@@ -174,6 +174,18 @@
             </c:forEach>
             <div class="pricing111">
               <div class="prici88opy">
+                <c:if test="${not empty carts}">
+                  <div class="pricing-info-77" id="couponRow" style="display:none;">
+                    <h3>優惠券</h3>
+                    <select id="couponSelect" style="max-width: 260px; height: 36px; border-radius: 8px; padding: 0 8px;">
+                      <option value="">不使用優惠券</option>
+                    </select>
+                  </div>
+                  <div class="pricing-info-77" id="discountRow" style="display:none; color:#1a7f4b;">
+                    <h3>折抵</h3>
+                    <h3>-$<span id="discountAmount">0</span></h3>
+                  </div>
+                </c:if>
                 <div class="pricing-info-77">
                   <h3>Total</h3>
                   <h3>$<span id="cartTotal"><c:out value="${total}"/></span></h3>
@@ -245,9 +257,48 @@
         });
       });
     });
+    var couponSelect = document.getElementById('couponSelect');
+    var originalTotal = document.getElementById('cartTotal').textContent;
+    if (couponSelect) {
+      // 載入可用的優惠券；沒有券就不顯示這一列
+      fetch('/api/coupons/usable').then(function (r) { return r.json(); }).then(function (list) {
+        if (!list.length) { return; }
+        list.forEach(function (c) {
+          var opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = c.label;
+          couponSelect.appendChild(opt);
+        });
+        document.getElementById('couponRow').style.display = '';
+      });
+      couponSelect.addEventListener('change', function () {
+        var discountRow = document.getElementById('discountRow');
+        if (!couponSelect.value) {
+          document.getElementById('cartTotal').textContent = originalTotal;
+          discountRow.style.display = 'none';
+          return;
+        }
+        // 折扣一律由伺服器算，這裡只負責顯示
+        call('/api/cart/coupon-preview?userCouponId=' + couponSelect.value, 'GET').then(function (d) {
+          if (!d.success) {
+            alert(d.message);
+            couponSelect.value = '';
+            couponSelect.dispatchEvent(new Event('change'));
+            return;
+          }
+          document.getElementById('discountAmount').textContent = d.discount;
+          document.getElementById('cartTotal').textContent = d.total;
+          discountRow.style.display = '';
+        });
+      });
+    }
     document.getElementById('checkout').addEventListener('click', function (e) {
       e.preventDefault();
-      call('/api/cart/checkout', 'POST').then(function (d) {
+      var checkoutUrl = '/api/cart/checkout';
+      if (couponSelect && couponSelect.value) {
+        checkoutUrl += '?userCouponId=' + encodeURIComponent(couponSelect.value);
+      }
+      call(checkoutUrl, 'POST').then(function (d) {
         alert(d.message);
         if (d.success) { location.href = '/findPlayergameid?id=${sessionScope.myUser.id}'; }
       });

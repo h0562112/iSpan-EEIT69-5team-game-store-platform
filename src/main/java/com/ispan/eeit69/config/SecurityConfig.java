@@ -67,10 +67,10 @@ public class SecurityConfig {
 				.antMatchers(HttpMethod.DELETE, "/adminpages/employee/EmployeeDelete/**").hasRole("ADMIN")
 				.antMatchers("/save", "/", "/register", "/css/**", "/js/**", "/images/**", "/bootstrap-3.4.1/**",
 						"/registersucessful", "/logout", "/forgotPassword", "/websocket/**", "/search",
-						"/access-denied", "/error", "/api/addToCart")
+						"/access-denied", "/error", "/api/addToCart", "/robots.txt", "/sitemap.xml")
 				.permitAll()
 				// 訪客可以瀏覽商品、分類與評論
-				.antMatchers(HttpMethod.GET, "/Item/**", "/ItemCategory", "/api/reviews").permitAll()
+				.antMatchers(HttpMethod.GET, "/Item/**", "/ItemCategory", "/api/reviews", "/news").permitAll()
 				.antMatchers("/adminpages/**").hasRole("ADMIN")
 				.antMatchers(HttpMethod.PUT, "/adminpages/employee/editEmployee/**").hasRole("ADMIN")
 

@@ -123,3 +123,59 @@ CREATE TABLE `player_Games_library` (
   `gameID` int DEFAULT NULL,
   PRIMARY KEY (`playerGameID`)
 ) ENGINE=InnoDB;
+
+
+CREATE TABLE `orders` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int DEFAULT NULL,
+  `subtotal` int DEFAULT NULL,
+  `discountAmount` int DEFAULT NULL,
+  `totalAmount` int DEFAULT NULL,
+  `couponCode` varchar(255) DEFAULT NULL,
+  `createTime` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `order_items` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `orderId` int DEFAULT NULL,
+  `itemId` int DEFAULT NULL,
+  `itemName` varchar(255) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`orderId`) REFERENCES `orders` (`id`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `coupon` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `discountType` varchar(10) DEFAULT NULL,
+  `discountValue` int DEFAULT NULL,
+  `minSpend` int DEFAULT NULL,
+  `expireTime` datetime(6) DEFAULT NULL,
+  `active` bit(1) DEFAULT NULL,
+  `createTime` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`code`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `user_coupon` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int DEFAULT NULL,
+  `couponId` int DEFAULT NULL,
+  `used` bit(1) DEFAULT NULL,
+  `usedTime` datetime(6) DEFAULT NULL,
+  `receivedTime` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`userId`, `couponId`),
+  FOREIGN KEY (`couponId`) REFERENCES `coupon` (`id`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `news` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` longtext,
+  `createTime` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;

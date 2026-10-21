@@ -84,7 +84,7 @@
               </nav>
             </div>
             <a href="topup.html" class="nav-link w-nav-link">點數商店</a>
-            <a href="account-details/news-copy-2.html" class="nav-link w-nav-link">消息新聞</a>
+            <a href="/news" class="nav-link w-nav-link">消息新聞</a>
             <div><img src="images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview.png" loading="lazy" width="68" sizes="(max-width: 991px) 100vw, (max-width: 1439px) 5vw, 67.99715423583984px" alt="" srcset="images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview-p-500.png 500w, images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview.png 552w"></div>
             <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
               <div class="dropdown-toggle w-dropdown-toggle">
@@ -95,8 +95,8 @@
                 <a href="/findEmployee.do?id=${sessionScope.myUser.id}&userId=${sessionScope.myUser.id}" class="dropdown-link w-dropdown-link">個人資料</a>
                 <a href="/findfriendsid?id=${sessionScope.myUser.id}" aria-current="page" class="dropdown-link-2 w-dropdown-link w--current">好友</a>
                 <a href="/findPlayergameid?id=${sessionScope.myUser.id}" class="dropdown-link-3 w-dropdown-link">遊戲庫</a>
-                <a href="account-details/coupon.html" class="dropdown-link-4 w-dropdown-link">我的優惠卷</a>
-                <a href="account-details/viewpurchasehistory.html" class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
+                <a href="/coupon" class="dropdown-link-4 w-dropdown-link">我的優惠卷</a>
+                <a href="/orders" class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
               </nav>
             </div>
             <sec:authorize access="isAuthenticated()">
@@ -228,7 +228,8 @@
 						      </div>
 						    </div>  
 						    <hr style="border: 1px solid;">
-						    <div class="f-sub-heading-regular">可加為好友的使用者如下</div>
+						    <div id="pending-requests" style="display:none; margin-bottom:16px;"></div>
+							    <div class="f-sub-heading-regular">可加為好友的使用者如下</div>
 						    <script type="text/javascript">
 					        // Your JavaScript functions
 					        function first() {
@@ -292,7 +293,6 @@
 										<label for="status">选择类型</label> <select class="form-control"
 											name="status" id="status">
 											<option selected>好友</option>
-											<option>群聊</option>
 										</select>
 									</div>
 								</form>
@@ -343,75 +343,64 @@
     * */
 
     $(document).on("click", "#save", function () {
-        if ($("#status").val()==='好友'){
-            status="accept";
-        }else
-            status=0;
-
-
-        //只有在status==0的时候,才向对方发送确认,不然就是加入到群组里
-        //只有对方同意添加后才添加
-        if(status==="accept"){
-            alert("添加好友完毕,待对方同意...")
-            var json11={}
-            json11.message='add';
-            json11.user=user;
-            json11.uuid=$("#userID2").val();
-            try {
-                //向后台服务器发生消息
-                ws.send(JSON.stringify(json11));
-            } catch (ex) {
-                alert(ex.message);
-            }
-        //    不然就直接加入到群组里
-        }else {
-            let data = {
-                "userID1":user,
-                "userID2":$("#userID2").val(),
-                "friendIp":$("#friendip").val(),
-                //当前的添加对象的状态
-                "status":status
-            }
-            append_friend(data);
-        }
-
-
+        sendFriendRequest($("#userID2").val());
         //关闭模态框
         $("#myModal").modal("hide");
-
-
     })
 
-    function append_friend(data1) {
-    // 获取 CSRF 令牌
-    const csrfToken = document.getElementById('csrfToken').value;
+    function csrfHeaders() {
+        return {'X-CSRF-TOKEN': document.getElementById('csrfToken').value};
+    }
 
-    // 打印 data1 对象的内容
-    console.log("data1 内容:", data1);
+    /* 邀請寫進資料庫，對方不用同時在線 */
+    function sendFriendRequest(targetId) {
+        $.ajax({
+            url: basePath + "/friend/request/" + user + "/" + targetId,
+            type: "post",
+            headers: csrfHeaders(),
+            success: function (res) {
+                alert(res.message);
+                if (res.success) { location.reload(); }
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX 请求错误:", error);
+            }
+        });
+    }
 
-    // 将 CSRF 令牌添加到请求头中
-    $.ajax({
-        url: basePath + "/friend/save",
-        type: "post",
-        data: JSON.stringify(data1),
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            'X-CSRF-TOKEN': csrfToken  // 添加 CSRF 令牌
-        },
-        success: function(response) {
-            // AJAX 请求成功后刷新整个页面
-            location.reload();
-        },
-        error: function(xhr, status, error) {
-            // 处理 AJAX 请求错误
-            console.error("AJAX 请求错误:", error);
-        }
-    });
-}
+    function answerRequest(requesterId, action) {
+        $.ajax({
+            url: basePath + "/friend/" + action + "/" + user + "/" + requesterId,
+            type: "post",
+            headers: csrfHeaders(),
+            success: function () { location.reload(); },
+            error: function (xhr, status, error) {
+                console.error("AJAX 请求错误:", error);
+            }
+        });
+    }
 
+    /* 載入「別人寄給我、還沒處理」的邀請（離線期間收到的也在這裡） */
+    function loadPending() {
+        $.get(basePath + "/friend/pending/" + user, function (res) {
+            var list = (res.data && res.data.pending) || [];
+            var box = $("#pending-requests").empty();
+            if (!list.length) { box.hide(); return; }
+            box.append($("<div>").addClass("f-sub-heading-regular").text("收到的好友邀請"));
+            list.forEach(function (r) {
+                var row = $("<div>").css({margin: "8px 0"});
+                row.append($("<span>").text(r.username + " 想加你為好友 "));
+                row.append($("<button type='button'>").addClass("f-button-primary w-button")
+                    .text("同意").on("click", function () { answerRequest(r.userId, "accept"); }));
+                row.append(" ");
+                row.append($("<button type='button'>").addClass("f-button-primary w-button")
+                    .text("拒絕").on("click", function () { answerRequest(r.userId, "reject"); }));
+                box.append(row);
+            });
+            box.show();
+        });
+    }
 
-
-    
     function refresh() {
         $.ajax({
                 "url": basePath+"/friend/get/"+user,
@@ -444,6 +433,7 @@
         //让首页隐藏
         frt.style.display = 'none';
         login(user);
+        loadPending();
         //让侧边栏可以点击
      
         //
@@ -488,52 +478,22 @@
 			                        //放入左边的消息气泡
 			                        appendLeft('系统',data.date,data.ip,data.message);
 			                    //    如果是自己发送消息,放入右边的消息气泡
-			                    }else if (data.user===user && data.message!=='add' &&data.message!=='yes_add'){
+			                    }else if (data.user===user && data.message!=='add' &&data.message!=='yes_add' &&data.message!=='friend_request' &&data.message!=='friend_accepted'){
 			                        appendRight(data.user,data.date,data.ip,data.message);
 			                    //    如果是别人发送消息,放入左边的消息气泡
-			                    }else if (data.user===uuid && data.message!=='add' &&data.message!=='yes_add'){
+			                    }else if (data.user===uuid && data.message!=='add' &&data.message!=='yes_add' &&data.message!=='friend_request' &&data.message!=='friend_accepted'){
 			                        appendLeft(data.user,data.date,data.ip,data.message);
 			                  
 			                    
 			                    //    添加好友消息
 			                    }
-			                    if (data.message === 'add') {
-			                        if (data.uuid === user) {
-			                            if (confirm(data.user + "请求添加好友,您是否同意?")) {
-			                                let data2 = {
-			                                    "userID1": user,
-			                                    "userID2": data.user,
-			//                                     "friendIp": $("#friendip").val(),  // 這裡換成了 "${employee.username}"
-			                                    "status": "accept",                                 			                                    
-			                                }
-			                                append_friend(data2)
-			                                //我确认同意了
-			                                var json12={}
-			                                json12.message='yes_add';
-			                                json12.user=user;
-			                                json12.uuid=data.user;                              
-			                                try {
-			                                    //向后台服务器发生消息
-			                                    ws.send(JSON.stringify(json12));
-			                                } catch (ex) {
-			                                    alert(ex.message);
-			                                }
-			                            }
-			                        }
-			                    //   监听到对方同意添加好友之后
-			                    }else if (data.message === 'yes_add') {
-			                        if (data.uuid === user) {
-			                            let data1 = {
-			                                "userID1": user,
-			                                "userID2": $("#userID2").val(),
-			//                                 "friendIp": $("#friendip").val(),  // 這裡換成了 data.user
-			                                "status": status,	                              
-			                            }
-			                        
-			                            append_friend(data1);
-			                        }
-			                    }
-			
+				                    if (data.message === 'friend_request' && data.uuid === user) {
+				                        //對方剛送出邀請，刷新待處理清單
+				                        loadPending();
+				                    } else if (data.message === 'friend_accepted' && data.uuid === user) {
+				                        location.reload();
+				                    }
+
 			                };
 			                //关闭时间
 			                ws.onclose = function (event) {

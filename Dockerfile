@@ -18,6 +18,8 @@ WORKDIR /app
 # 專案使用 JSP，必須以 war 方式執行 (executable war，內嵌 Tomcat)
 COPY --from=build /app/target/springdemo-*.war app.war
 
+COPY .env .env
+
 EXPOSE 8080
 # DB_URL / DB_PASSWORD 等設定請用環境變數或 docker-compose 的 env_file 傳入
 ENTRYPOINT ["java", "-jar", "/app/app.war"]

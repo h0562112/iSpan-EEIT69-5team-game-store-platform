@@ -282,6 +282,25 @@ public class MyWebSocket {
         }
     }
 
+    /**
+     * 只通知在線的人（好友邀請本身已存進資料庫，離線的人上線後會從資料庫讀到）
+     *
+     * @param to   收件者會員 id
+     * @param type friend_request / friend_accepted
+     * @param from 觸發者會員 id
+     */
+    public static void notifyUser(String to, String type, String from) {
+        Message message = new Message();
+        message.setUser(from);
+        message.setUuid(to);
+        message.setMessage(type);
+        for (MyWebSocket myWebSocket : webSockets) {
+            if (to.equals(myWebSocket.user)) {
+                myWebSocket.sendMessage(message);
+            }
+        }
+    }
+
     // 获取session对象
     public Session getSession() {
         return this.session;

@@ -1,0 +1,192 @@
+/* 最新消息 / 購買記錄 / 我的優惠券 共用樣式，配色沿用會員中心（#160042 深紫、#f0ece8 米色） */
+.ex-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  color: #160042;
+}
+
+.ex-title {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.ex-sub {
+  text-align: center;
+  color: #6b5f86;
+  margin-bottom: 28px;
+}
+
+.ex-card {
+  background: #f0ece8;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.ex-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ex-card-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ex-muted {
+  color: #6b5f86;
+  font-size: 14px;
+}
+
+.ex-empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: #6b5f86;
+}
+
+/* 最新消息：可展開 */
+.ex-news summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ex-news summary::-webkit-details-marker {
+  display: none;
+}
+
+.ex-news summary::after {
+  content: "＋";
+  color: #6b5f86;
+}
+
+.ex-news[open] summary::after {
+  content: "－";
+}
+
+.ex-news-body {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #d9d2c8;
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+
+/* 購買記錄 */
+.ex-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ex-table td {
+  padding: 8px 0;
+  border-top: 1px solid #d9d2c8;
+}
+
+.ex-table td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ex-sum {
+  margin-top: 10px;
+  text-align: right;
+  line-height: 1.9;
+}
+
+.ex-sum strong {
+  font-size: 20px;
+}
+
+.ex-discount {
+  color: #1a7f4b;
+}
+
+/* 優惠券 */
+.ex-claim {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ex-claim input {
+  flex: 1;
+  min-width: 200px;
+  height: 44px;
+  border: 1px solid #c9c0b4;
+  border-radius: 50px;
+  padding: 0 20px;
+  background: #fff;
+  color: #160042;
+}
+
+.ex-btn {
+  height: 44px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 50px;
+  background: #160042;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ex-btn:hover {
+  background: #2c1470;
+  color: #fff;
+}
+
+.ex-coupon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ex-coupon-value {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.ex-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 50px;
+  font-size: 13px;
+  background: #d9f2e4;
+  color: #1a7f4b;
+}
+
+.ex-badge.off {
+  background: #e4e0da;
+  color: #6b5f86;
+}
+
+.ex-coupon.is-off {
+  opacity: .6;
+}
+
+.ex-msg {
+  margin-top: 10px;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+@media (max-width: 600px) {
+  .ex-title { font-size: 28px; }
+  .ex-card { padding: 16px; }
+}

@@ -1,0 +1,41 @@
+<section class="footer-light-co111-copy-copy">
+      <div class="container">
+        <div class="footer-wrapper-two">
+          <a href="#" class="footer-brand-2 w-inline-block"><img src="/images/LOGO.png" loading="lazy" width="253" sizes="(max-width: 479px) 93vw, 252.9861297607422px" alt="" srcset="/images/LOGO-p-500.png 500w, /images/LOGO.png 556w"></a>
+          <div class="footer-block-two">
+            <div class="footer-title">快速連結</div>
+            <a href="/" class="footer-link-two">首頁</a>
+            <a href="/news" class="footer-link-two">最新消息</a>
+          </div>
+          <div class="footer-block-two">
+            <div class="footer-title">會員專區</div>
+            <a href="/coupon" class="footer-link-two">我的優惠券</a>
+            <a href="/orders" class="footer-link-two">購買記錄</a>
+          </div>
+          <div class="footer-form w-form">
+            <form id="wf-form-Footer-Form" name="wf-form-Footer-Form" data-name="Footer Form" method="get" class="footer-form-container" data-wf-page-id="650071e17cd3c26438525fbb" data-wf-element-id="da20ee2c-0777-11ec-006c-95599e3f13b5">
+              <div class="footer-title">Subscribe</div>
+              <div class="footer-form-block"><input type="email" class="footer-form-field w-input" maxlength="256" name="Footer-Email-2" data-name="Footer Email 2" aria-label="Get product updates" placeholder="Get product updates" id="Footer-Email-2" required=""><input type="submit" value="" data-wait="Please wait..." class="footer-form-submit w-button"></div>
+            </form>
+            <div class="w-form-done">
+              <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="w-form-fail">
+              <div>Oops! Something went wrong while submitting the form.</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-divider-two"></div>
+      </div>
+      <div class="footer-bottom-2">
+        <div class="footer-copyright">© 2023 5team. All rights reserved </div>
+        <div class="footer-copyright">
+          <a href="mailto:5team44684468@gmail.com"><strong>聯繫我們:5team44684468@gmail.com</strong></a><strong> </strong>
+        </div>
+        <a href="#" class="footer-social-link-2 w-inline-block"><img src="/images/face-removebg-preview.png" loading="lazy" width="96" alt="" class="image-41"></a>
+        <a href="#" class="footer-social-link-2 w-inline-block"><img src="/images/Twi-removebg-preview.png" loading="lazy" width="97" alt="" class="image-40"></a>
+        <div class="footer-social-block-two">
+          <a href="#" class="footer-social-link-2 w-inline-block"><img src="/images/YT-removebg-preview.png" loading="lazy" width="93" alt=""></a>
+        </div>
+      </div>
+    </section>

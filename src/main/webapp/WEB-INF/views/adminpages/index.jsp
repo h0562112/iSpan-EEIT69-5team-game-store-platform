@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>後臺 - 5Steam</title>
+<title>後臺 - 5team</title>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
@@ -131,7 +131,7 @@
 							aria-labelledby="headingthree" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link"
-									href="<c:url value='/adminpages/item/queryItem' />"><font size="4"><b>訂單查詢</b></font></a> 
+									href=\"<c:url value='/adminpages/orders' />\"><font size="4"><b>訂單查詢</b></font></a> 
 							</nav>
 						</div>
 						
@@ -150,19 +150,36 @@
 						<div class="collapse" id="collapseLayouts4"
 							aria-labelledby="headingthree" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href=""><font size="4"><b>新增優惠券</b></font></a>
+								<a class="nav-link" href="<c:url value='/adminpages/coupon' />"><font size="4"><b>新增優惠券</b></font></a>
 							</nav>
 						</div>
 						
 						<div class="collapse" id="collapseLayouts4"
 							aria-labelledby="headingthree" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href=""><font size="4"><b>派發優惠券</b></font></a>
+								<a class="nav-link" href="<c:url value='/adminpages/coupon' />"><font size="4"><b>派發優惠券</b></font></a>
 							</nav>
 						</div>
 						
 
 						
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+							data-bs-target="#collapseNews" aria-expanded="false"
+							aria-controls="collapseNews">
+							<div class="sb-nav-link-icon">
+								<font size="4"><i class="fa-regular fa-newspaper"></i></font>
+							</div> <font size="4"><b>最新消息</b></font>
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapseNews"
+							aria-labelledby="headingthree" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="<c:url value='/adminpages/news' />"><font size="4"><b>消息管理</b></font></a>
+							</nav>
+						</div>
+
 						<div class="sb-sidenav-menu-heading"></div>
 					</div>
 				</div>
