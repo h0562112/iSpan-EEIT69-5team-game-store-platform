@@ -35,7 +35,7 @@ import com.ispan.eeit69.repository.memberRepository.FriendsMessagesRepository;
 
 
 @Configurable
-@ServerEndpoint(value = "/websocket/{user}/{ip}")
+@ServerEndpoint(value = "/websocket/{user}/{ip}", configurator = MyWebSocket.HttpSessionConfigurator.class)
 @Component
 public class MyWebSocket {
 
@@ -44,6 +44,18 @@ public class MyWebSocket {
     private FriendsMessagesRepository friendsMessagesRepository;
 	
 	
+	/** 握手時把 HttpSession 帶進 WebSocket，用來確認連線者就是登入者本人 */
+	public static class HttpSessionConfigurator extends javax.websocket.server.ServerEndpointConfig.Configurator {
+		@Override
+		public void modifyHandshake(javax.websocket.server.ServerEndpointConfig config,
+				javax.websocket.server.HandshakeRequest request, javax.websocket.HandshakeResponse response) {
+			Object httpSession = request.getHttpSession();
+			if (httpSession != null) {
+				config.getUserProperties().put("httpSession", httpSession);
+			}
+		}
+	}
+
 	  public MyWebSocket() {
 	        // 從 Spring ApplicationContext 中手動獲取 FriendsMessagesRepository bean
 	        friendsMessagesRepository = SpringdemoApplication.context.getBean(FriendsMessagesRepository.class);
@@ -88,6 +100,20 @@ public class MyWebSocket {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return;
+        }
+        // 路徑上的 user 必須是目前登入的會員 id，避免冒用他人身分
+        javax.servlet.http.HttpSession httpSession = (javax.servlet.http.HttpSession) session.getUserProperties()
+                .get("httpSession");
+        Object me = null;
+        try {
+            me = httpSession == null ? null : httpSession.getAttribute("myUser");
+        } catch (IllegalStateException e) {
+            // session 已失效
+        }
+        if (!(me instanceof com.ispan.eeit69.model.User)
+                || !String.valueOf(((com.ispan.eeit69.model.User) me).getId()).equals(user)) {
+            session.close();
             return;
         }
         // 增加在线人数
@@ -144,7 +170,6 @@ public class MyWebSocket {
         String uuid = (String) jsonObject.get("uuid");
         String user1 = (String) jsonObject.get("user");
         String currentGroup = (String) jsonObject.get("currentGroup");
-        System.out.println("我想要看內容"+msg);
         try {
             int senderUserId = Integer.parseInt(user);
             int receiverUserId = Integer.parseInt(uuid);
@@ -154,13 +179,10 @@ public class MyWebSocket {
             messageEntity.setContent(msg);
             messageEntity.setTimeStamp(new Timestamp(System.currentTimeMillis()));
 
-            System.out.println(messageEntity.getSenderUserid());
-            System.out.println(messageEntity.getReceiverUserid());
            
 //            System.out.println("我想要看內容"+messageEntity);
             
             if (friendsMessagesRepository != null) {
-            	 System.out.println("我想要看內容"+friendsMessagesRepository);
             	
                 friendsMessagesRepository.save(messageEntity);
             } else {
@@ -169,7 +191,6 @@ public class MyWebSocket {
         } catch (NumberFormatException e) {
             log.error("無法將user或uuid轉換為整數: " + e.getMessage());
         }
-        System.out.println("friendsMessagesRepository: " + friendsMessagesRepository);
 
         log.info("来自[{}]消息:{}", user, msg);
 

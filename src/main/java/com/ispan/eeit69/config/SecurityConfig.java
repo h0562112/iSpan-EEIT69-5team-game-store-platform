@@ -28,8 +28,6 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.ispan.eeit69.model.Role;
 import com.ispan.eeit69.model.User;
@@ -57,33 +55,23 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-	    return new WebMvcConfigurer() {
-	        @Override
-	        public void addCorsMappings(CorsRegistry registry) {
-	            registry.addMapping("/**")
-	                    .allowedOrigins("http://10.0.101.88:8080","http://10.0.101.72:8080")
-	                    .allowedMethods("GET", "POST", "PUT", "DELETE")
-	                    .allowCredentials(true);
-	        }
-	    };
-	}
-	
-	@Bean
 	public FilterRegistrationBean<HiddenHttpMethodFilter> hiddenHttpMethodFilter() {
 		FilterRegistrationBean<HiddenHttpMethodFilter> filterRegBean = new FilterRegistrationBean<>();
 		filterRegBean.setFilter(new HiddenHttpMethodFilter());
 		return filterRegBean;
 	}
-	
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(configurer -> configurer
 				.antMatchers(HttpMethod.DELETE, "/adminpages/employee/EmployeeDelete/**").hasRole("ADMIN")
-				.antMatchers("/save", "/", "/register", "/css/**", "/js/**", "/images/**", "/registersucessful",
-						"/logout", "/forgotPassword", "/websocket/**", "/friend/save", "/findByfriendmessage", "/api",
-						"/search")
-				.permitAll().antMatchers("/adminpages/**").hasRole("ADMIN")
+				.antMatchers("/save", "/", "/register", "/css/**", "/js/**", "/images/**", "/bootstrap-3.4.1/**",
+						"/registersucessful", "/logout", "/forgotPassword", "/websocket/**", "/search",
+						"/access-denied", "/error", "/api/addToCart")
+				.permitAll()
+				// 訪客可以瀏覽商品、分類與評論
+				.antMatchers(HttpMethod.GET, "/Item/**", "/ItemCategory", "/api/reviews").permitAll()
+				.antMatchers("/adminpages/**").hasRole("ADMIN")
 				.antMatchers(HttpMethod.PUT, "/adminpages/employee/editEmployee/**").hasRole("ADMIN")
 
 				.anyRequest().hasRole("USER"))
@@ -107,6 +95,7 @@ public class SecurityConfig {
 								user.setRoles(new HashSet<>(Arrays.asList(userRole)));
 								userService.save(user);
 							}
+							populateSession(request, username);
 							new SavedRequestAwareAuthenticationSuccessHandler().onAuthenticationSuccess(request,
 									response, authentication);
 						}).failureHandler((request, response, exception) -> {
@@ -120,32 +109,36 @@ public class SecurityConfig {
 		return http.build();
 	}
 
+	/** 把登入者與頭像放進 session，供各頁面的導覽列與會員功能使用 (請勿刪除) */
+	private void populateSession(HttpServletRequest request, String username) {
+		HttpSession session = request.getSession();
+
+		com.ispan.eeit69.model.User myUser = userService.findByUserName(username);
+		session.setAttribute("myUser", myUser);
+		if (myUser == null) {
+			return;
+		}
+
+		com.ispan.eeit69.model.Avatar myimage = avatarService.findAvatarByUserId(myUser.getId());
+		if (myimage != null && myimage.getPicture() != null) {
+			try {
+				// Clob 內容本身就是 Base64 字串，直接取出
+				Clob itemPictureClob = myimage.getPicture();
+				session.setAttribute("itemPictureBase64",
+						itemPictureClob.getSubString(1, (int) itemPictureClob.length()));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	@Bean
 	public AuthenticationSuccessHandler loginSuccessHandler() {
 		return new SimpleUrlAuthenticationSuccessHandler() {
 			@Override
 			public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 					Authentication authentication) throws IOException, ServletException {
-				// 會員與好友系統抓使用者ip請勿刪除
-				HttpSession session = request.getSession();
-
-				com.ispan.eeit69.model.User myUser = userService.findByUserName(authentication.getName());
-				session.setAttribute("myUser", myUser);
-
-				if (myUser != null) {
-					com.ispan.eeit69.model.Avatar myimage = avatarService.findAvatarByUserId(myUser.getId());
-
-					if (myimage != null && myimage.getPicture() != null) {
-						try {
-							// Clob 內容本身就是 Base64 字串，直接取出
-							Clob itemPictureClob = myimage.getPicture();
-							String itemPictureBase64 = itemPictureClob.getSubString(1, (int) itemPictureClob.length());
-							session.setAttribute("itemPictureBase64", itemPictureBase64);
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-					}
-				}
+				populateSession(request, authentication.getName());
 
 				// session 寫完後再重導向
 				if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ispan.eeit69.model.Friends;
 
@@ -14,6 +15,7 @@ public interface FriendRepository extends JpaRepository<Friends, Long> {
 
     List<Friends> findByUserID1(Integer userID1);
 
+    @Transactional
     void deleteByUserID1AndUserID2(Integer userID1, Integer userID2);
 
    

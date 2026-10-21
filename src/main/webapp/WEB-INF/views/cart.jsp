@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Wed Sep 13 2023 01:56:47 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="6500730b1d81c0f2b1ba0647" data-wf-site="64e5ed3359b16400aec286b0">
@@ -33,7 +34,7 @@
       <div class="nav-main">
         <div class="wrapper nav-bar-wrapper">
           <a href="/" class="brand w-nav-brand">
-            <div><img src="images/LOGO.png" loading="lazy" width="214" sizes="(max-width: 479px) 55vw, 213.99147033691406px" alt="" srcset="images/LOGO-p-500.png 500w, images/LOGO.png 556w"></div>
+            <div><img src="/images/LOGO.png" loading="lazy" width="214" sizes="(max-width: 479px) 55vw, 213.99147033691406px" alt="" srcset="/images/LOGO-p-500.png 500w, /images/LOGO.png 556w"></div>
           </a>
           <div class="navigation">
             <nav role="navigation" class="nav-menu w-nav-menu">
@@ -44,38 +45,36 @@
                   <div>遊戲類別</div>
                 </div>
                 <nav class="w-dropdown-list">
-                  <a href="game-search-page/view-purchase-history-copy-3.html" class="dropdown-link w-dropdown-link">射擊遊戲</a>
-                  <a href="game-search-page/view-purchase-history-copy-3.html" class="dropdown-link-2 w-dropdown-link">動作冒險</a>
-                  <a href="game-search-page/view-purchase-history-copy-3.html" class="dropdown-link-3 w-dropdown-link">角色扮演</a>
-                  <a href="game-search-page/view-purchase-history-copy-3.html" class="dropdown-link-4 w-dropdown-link">即時戰略</a>
-                  <a href="game-search-page/view-purchase-history-copy-3.html" class="dropdown-link-5 w-dropdown-link">卡牌策略</a>
+                  <a href="/ItemCategory?category=射擊遊戲" class="dropdown-link w-dropdown-link">射擊遊戲</a>
+                  <a href="/ItemCategory?category=動作冒險" class="dropdown-link-2 w-dropdown-link">動作冒險</a>
+                  <a href="/ItemCategory?category=角色扮演" class="dropdown-link-3 w-dropdown-link">角色扮演</a>
+                  <a href="/ItemCategory?category=即時戰略" class="dropdown-link-4 w-dropdown-link">即時戰略</a>
+                  <a href="/ItemCategory?category=卡牌策略" class="dropdown-link-5 w-dropdown-link">卡牌策略</a>
                 </nav>
               </div>
-              <a href="topup.html" class="nav-link w-nav-link">點數商店</a>
-              <a href="account-details/news-copy-2.html" class="nav-link w-nav-link">消息新聞</a>
-              <div><img src="images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview.png" loading="lazy" width="68" sizes="(max-width: 991px) 100vw, (max-width: 1439px) 5vw, 67.99715423583984px" alt="" srcset="images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview-p-500.png 500w, images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview.png 552w"></div>
+              <a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a>
+                            <div><img src="/images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview.png" loading="lazy" width="68" sizes="(max-width: 991px) 100vw, (max-width: 1439px) 5vw, 67.99715423583984px" alt="" srcset="images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview-p-500.png 500w, images/螢幕擷取畫面_2023-09-02__1_-removebg-preview-removebg-preview.png 552w"></div>
               <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
                 <div class="dropdown-toggle w-dropdown-toggle">
                   <div class="icon w-icon-dropdown-toggle"></div>
                   <div>會員中心</div>
                 </div>
                 <nav class="w-dropdown-list">
-                  <a href="member-profile/member-profile.html" class="dropdown-link w-dropdown-link">個人資料</a>
-                  <a href="member-profile/friend-list.html" class="dropdown-link-2 w-dropdown-link">好友</a>
-                  <a href="member-profile/game-library.html" class="dropdown-link-3 w-dropdown-link">遊戲庫</a>
-                  <a href="account-details/coupon.html" class="dropdown-link-4 w-dropdown-link">我的優惠卷</a>
-                  <a href="account-details/viewpurchasehistory.html" class="dropdown-link-5 w-dropdown-link">檢視購買記錄</a>
+                  <a href="/findEmployee.do?id=${sessionScope.myUser.id}&userId=${sessionScope.myUser.id}" class="dropdown-link w-dropdown-link">個人資料</a>
+                  <a href="/findfriendsid?id=${sessionScope.myUser.id}" class="dropdown-link-2 w-dropdown-link">好友</a>
+                  <a href="/findPlayergameid?id=${sessionScope.myUser.id}" class="dropdown-link-3 w-dropdown-link">遊戲庫</a>
                 </nav>
               </div>
-              <a href="login-register/model2.html" class="nav-link w-nav-link">註冊</a>
-              <a href="login-register/loginpage.html" class="nav-link w-nav-link">登入</a>
+              <a href="/register" class="nav-link w-nav-link">註冊</a>
+              <sec:authorize access="isAuthenticated()"><a href="/logout" class="nav-link w-nav-link">登出</a></sec:authorize>
+              <sec:authorize access="!isAuthenticated()"><a href="/login" class="nav-link w-nav-link">登入</a></sec:authorize>
             </nav>
             <div class="menu-button w-nav-button">
               <div class="icon-2 w-icon-nav-menu"></div>
             </div>
             <div data-node-type="commerce-cart-wrapper" data-open-product="" data-wf-cart-type="rightDropdown" data-wf-cart-query="" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper cart">
               <a href="#" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart">
-                <div class="w-inline-block">購物車</div><img src="images/cart-icon.svg" alt="" class="cart-icon">
+                <div class="w-inline-block">購物車</div><img src="/images/cart-icon.svg" alt="" class="cart-icon">
                 <div style="display:none" data-count-hide-rule="empty" class="w-commerce-commercecartopenlinkcount item-count">0</div>
               </a>
               <div data-node-type="commerce-cart-container-wrapper" style="display:none" class="w-commerce-commercecartcontainerwrapper w-commerce-commercecartcontainerwrapper--cartType-rightDropdown">
@@ -152,45 +151,35 @@
       </div>
     </div>
     <section class="pricing-items">
+      <input type="hidden" id="csrfToken" value="${_csrf.token}" />
       <div class="w-layout-blockcontainer container-34 w-container">
         <div class="div-block-84"><strong>我的購物車</strong></div>
         <div class="container-33">
           <div class="pricing-wrapper-two">
-            <div class="pricing-card-two"><img src="https://uploads-ssl.webflow.com/62434fa732124a0fb112aab4/62434fa732124a2a3312aae1_placeholder%203.svg" loading="lazy" width="195" alt="" class="pricing-image-two shadow-two">
-              <div class="pricing-content">
-                <div class="tagline">購物車編號 No.1</div>
-                <div class="pricing-info">
-                  <h3><strong>魔物獵人</strong></h3>
-                  <h3>$1,999</h3>
+            <c:if test="${empty carts}">
+              <div class="pricing-card-two"><div class="pricing-content"><h3>購物車目前是空的</h3></div></div>
+            </c:if>
+            <c:forEach var="cart" items="${carts}" varStatus="st">
+              <div class="pricing-card-two" id="cart-${cart.cartId}">
+                <img src="${cart.item.dataUri}" loading="lazy" width="195" alt="" class="pricing-image-two shadow-two">
+                <div class="pricing-content">
+                  <div class="tagline">購物車編號 No.${st.count}</div>
+                  <div class="pricing-info">
+                    <h3><strong><c:out value="${cart.item.itemName}"/></strong></h3>
+                    <h3>$<c:out value="${cart.price}"/></h3>
+                  </div>
+                  <a href="#" class="remove-cart" data-cart-id="${cart.cartId}">移除</a>
                 </div>
               </div>
-            </div>
-            <div class="pricing-card-two"><img src="https://uploads-ssl.webflow.com/62434fa732124a0fb112aab4/62434fa732124a2a3312aae1_placeholder%203.svg" loading="lazy" width="195" alt="" class="pricing-image-two shadow-two">
-              <div class="pricing-content">
-                <div class="tagline">購物車編號 No.2</div>
-                <div class="pricing-info">
-                  <h3><strong>英雄聯盟</strong></h3>
-                  <h3>$2,000</h3>
-                </div>
-              </div>
-            </div>
-            <div class="pricing-card-two"><img src="https://uploads-ssl.webflow.com/62434fa732124a0fb112aab4/62434fa732124a2a3312aae1_placeholder%203.svg" loading="lazy" width="195" alt="" class="pricing-image-two shadow-two">
-              <div class="pricing-content">
-                <div class="tagline">購物車編號 No.3</div>
-                <div class="pricing-info">
-                  <h3><strong>漆彈大作戰</strong></h3>
-                  <h3>$1,000</h3>
-                </div>
-              </div>
-            </div>
+            </c:forEach>
             <div class="pricing111">
               <div class="prici88opy">
                 <div class="pricing-info-77">
                   <h3>Total</h3>
-                  <h3>$4,999</h3>
+                  <h3>$<span id="cartTotal"><c:out value="${total}"/></span></h3>
                 </div>
               </div>
-              <a href="#" class="button-90 w-button">去買單</a>
+              <a href="#" id="checkout" class="button-90 w-button">去買單</a>
             </div>
           </div>
         </div>
@@ -199,7 +188,7 @@
     <section class="fo733opy">
       <div class="container">
         <div class="footer-wrapper-two">
-          <a href="#" class="footer-brand-2 w-inline-block"><img src="images/LOGO.png" loading="lazy" width="253" sizes="(max-width: 479px) 88vw, 252.9971466064453px" alt="" srcset="images/LOGO-p-500.png 500w, images/LOGO.png 556w"></a>
+          <a href="#" class="footer-brand-2 w-inline-block"><img src="/images/LOGO.png" loading="lazy" width="253" sizes="(max-width: 479px) 88vw, 252.9971466064453px" alt="" srcset="/images/LOGO-p-500.png 500w, /images/LOGO.png 556w"></a>
           <div class="footer-block-two">
             <div class="footer-title">company</div>
             <a href="#" class="footer-link-two">How it works</a>
@@ -231,15 +220,39 @@
         <div class="footer-copyright">
           <a href="#"><strong>聯繫我們:5team44684468@gmail.com</strong></a><strong> </strong>
         </div>
-        <a href="#" class="footer-social-link-2 w-inline-block"><img src="images/face-removebg-preview.png" loading="lazy" width="96" alt="" class="image-41"></a>
-        <a href="#" class="footer-social-link-2 w-inline-block"><img src="images/Twi-removebg-preview.png" loading="lazy" width="97" alt="" class="image-40"></a>
+        <a href="#" class="footer-social-link-2 w-inline-block"><img src="/images/face-removebg-preview.png" loading="lazy" width="96" alt="" class="image-41"></a>
+        <a href="#" class="footer-social-link-2 w-inline-block"><img src="/images/Twi-removebg-preview.png" loading="lazy" width="97" alt="" class="image-40"></a>
         <div class="footer-social-block-two">
-          <a href="#" class="footer-social-link-2 w-inline-block"><img src="images/YT-removebg-preview.png" loading="lazy" width="93" alt=""></a>
+          <a href="#" class="footer-social-link-2 w-inline-block"><img src="/images/YT-removebg-preview.png" loading="lazy" width="93" alt=""></a>
         </div>
       </div>
     </section>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=64e5ed3359b16400aec286b0" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="js/webflow.js" type="text/javascript"></script>
+  <script src="/js/webflow.js" type="text/javascript"></script>
+<script>
+  (function () {
+    var token = document.getElementById('csrfToken').value;
+    function call(url, method) {
+      return fetch(url, { method: method, headers: { 'X-CSRF-TOKEN': token } })
+        .then(function (r) { return r.json(); });
+    }
+    document.querySelectorAll('.remove-cart').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        call('/api/cart/' + a.getAttribute('data-cart-id'), 'DELETE').then(function (d) {
+          if (d.success) { location.reload(); } else { alert(d.message); }
+        });
+      });
+    });
+    document.getElementById('checkout').addEventListener('click', function (e) {
+      e.preventDefault();
+      call('/api/cart/checkout', 'POST').then(function (d) {
+        alert(d.message);
+        if (d.success) { location.href = '/findPlayergameid?id=${sessionScope.myUser.id}'; }
+      });
+    });
+  })();
+  </script>
 </body>
 </html>

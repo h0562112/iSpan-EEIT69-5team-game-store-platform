@@ -6220,7 +6220,7 @@ p {
   text-decoration: none;
 }
 
-.f-careers-text-link.test123 {
+.f-careers-text-link.edit-link {
   padding-right: 20px;
 }
 
@@ -13368,7 +13368,7 @@ p {
     font-size: 24px;
   }
 
-  .f-careers-text-link.test123 {
+  .f-careers-text-link.edit-link {
     color: #111;
     padding-right: 10px;
   }

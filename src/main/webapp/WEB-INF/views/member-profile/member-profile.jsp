@@ -76,7 +76,7 @@
             <div class="icon-2 w-icon-nav-menu"></div>
           </div>
           <div data-node-type="commerce-cart-wrapper" data-open-product="" data-wf-cart-type="rightDropdown" data-wf-cart-query="" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper cart">
-            <a href="#" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart">
+            <a href="/cart" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart">
               <div class="w-inline-block">購物車</div><img src="images/cart-icon.svg" alt="" class="cart-icon">
               <div style="display:none" data-count-hide-rule="empty" class="w-commerce-commercecartopenlinkcount item-count">0</div>
             </a>
@@ -203,7 +203,7 @@
                       <div class="f-paragraph-regular-4 f-text-color-gray-500 tet">個人資訊</div>
                     </div>
                     <div id="w-node-c764d726-9e84-740d-1833-c6421cce6710-38525fdc" class="div-block-19">
-                      <a href="/updatep_Profile?id=${user.id}&userId=${user.id}" class="f-careers-text-link test123">修改資料</a>
+                      <a href="/updatep_Profile?id=${user.id}&userId=${user.id}" class="f-careers-text-link edit-link">修改資料</a>
                     </div>
                   </div>
                 </div>

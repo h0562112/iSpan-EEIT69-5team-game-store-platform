@@ -89,7 +89,7 @@
 									
 								</nav>
 							</div>
-							<a href="http://10.0.101.72:8080/topup" class="nav-link w-nav-link">點數商店</a> <a
+							<a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a> <a
 								href="account-details/news-copy-2.html"
 								class="nav-link w-nav-link">消息新聞</a>
 							<div>
@@ -145,7 +145,7 @@
 							data-wf-cart-type="rightDropdown" data-wf-cart-query=""
 							data-wf-page-link-href-prefix=""
 							class="w-commerce-commercecartwrapper cart">
-							<a href="http://10.0.101.72:8080/cart" data-node-type="commerce-cart-open-link"
+							<a href="/cart" data-node-type="commerce-cart-open-link"
 								class="w-commerce-commercecartopenlink cart-button w-inline-block"
 								role="button" aria-haspopup="dialog" aria-label="Open cart">
 								<div class="w-inline-block">購物車</div> <img
@@ -161,7 +161,7 @@
 									class="w-commerce-commercecartcontainer cart-container">
 									<div class="w-commerce-commercecartheader cart-header">
 										<h4 class="w-commerce-commercecartheading">我的購物車</h4>
-										<a href="http://10.0.101.72:8080/cart" data-node-type="commerce-cart-close-link"
+										<a href="/cart" data-node-type="commerce-cart-close-link"
 											class="w-commerce-commercecartcloselink w-inline-block"
 											role="button" aria-label="Close cart"><svg width="16px"
 												height="16px" viewbox="0 0 16 16">
@@ -605,7 +605,7 @@
 									class="dropdown-link-5 w-dropdown-link">卡牌策略</a>
 							</nav>
 						</div>
-						<a href="http://10.0.101.72:8080/topup" class="nav-link w-nav-link">點數商店</a> <a
+						<a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a> <a
 							href="account-details/news-copy-2.html"
 							class="nav-link w-nav-link">消息新聞</a>
 						<div>
@@ -660,7 +660,7 @@
 						data-wf-cart-type="rightDropdown" data-wf-cart-query=""
 						data-wf-page-link-href-prefix=""
 						class="w-commerce-commercecartwrapper cart">
-						<a href="http://10.0.101.72:8080/cart" data-node-type="commerce-cart-open-link"
+						<a href="/cart" data-node-type="commerce-cart-open-link"
 							class="w-commerce-commercecartopenlink cart-button w-inline-block"
 							role="button" aria-haspopup="dialog" aria-label="Open cart">
 							<div class="w-inline-block">購物車</div> <img
@@ -675,7 +675,7 @@
 								class="w-commerce-commercecartcontainer cart-container">
 								<div class="w-commerce-commercecartheader cart-header">
 									<h4 class="w-commerce-commercecartheading">我的購物車</h4>
-									<a href="http://10.0.101.72:8080/cart" data-node-type="commerce-cart-close-link"
+									<a href="/cart" data-node-type="commerce-cart-close-link"
 										class="w-commerce-commercecartcloselink w-inline-block"
 										role="button" aria-label="Close cart"><svg width="16px"
 											height="16px" viewbox="0 0 16 16">
@@ -818,7 +818,7 @@
 									<a href="/ItemCategory?category=優惠商品" class="dropdown-link-7 w-dropdown-link">優惠商品</a>
 							</nav>
 						</div>
-						<a href="http://10.0.101.72:8080/topup" class="nav-link w-nav-link">點數商店</a> <a
+						<a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a> <a
 							href="account-details/news-copy-2.html"
 							class="nav-link w-nav-link">消息新聞</a>
 						<div>
@@ -873,7 +873,7 @@
 						data-wf-cart-type="rightDropdown" data-wf-cart-query=""
 						data-wf-page-link-href-prefix=""
 						class="w-commerce-commercecartwrapper cart">
-						<a href="http://10.0.101.72:8080/cart" data-node-type="commerce-cart-open-link"
+						<a href="/cart" data-node-type="commerce-cart-open-link"
 							class="w-commerce-commercecartopenlink cart-button w-inline-block"
 							role="button" aria-haspopup="dialog" aria-label="Open cart">
 							<div class="w-inline-block">購物車</div> <img
@@ -888,7 +888,7 @@
 								class="w-commerce-commercecartcontainer cart-container">
 								<div class="w-commerce-commercecartheader cart-header">
 									<h4 class="w-commerce-commercecartheading">我的購物車</h4>
-									<a href="http://10.0.101.72:8080/cart" data-node-type="commerce-cart-close-link"
+									<a href="/cart" data-node-type="commerce-cart-close-link"
 										class="w-commerce-commercecartcloselink w-inline-block"
 										role="button" aria-label="Close cart"><svg width="16px"
 											height="16px" viewbox="0 0 16 16">
@@ -1031,7 +1031,7 @@
 								<a href="/ItemCategory?category=優惠商品" class="dropdown-link w-dropdown-link">優惠商品</a>
 							</nav>
 						</div>
-						<a href="http://10.0.101.72:8080/topup" class="nav-link w-nav-link">點數商店</a> <a
+						<a href="/ItemCategory?category=優惠商品" class="nav-link w-nav-link">優惠商品</a> <a
 							href="account-details/news-copy-2.html"
 							class="nav-link w-nav-link">消息新聞</a>
 						<div>
@@ -1112,7 +1112,7 @@
 						data-wf-cart-type="rightDropdown" data-wf-cart-query=""
 						data-wf-page-link-href-prefix=""
 						class="w-commerce-commercecartwrapper cart">
-						<a href="http://10.0.101.72:8080/cart" data-node-type="commerce-cart-open-link"
+						<a href="/cart" data-node-type="commerce-cart-open-link"
 							class="w-commerce-commercecartopenlink cart-button w-inline-block"
 							role="button" aria-haspopup="dialog" aria-label="Open cart">
 							<div class="w-inline-block">購物車</div> <img
@@ -1127,7 +1127,7 @@
 								class="w-commerce-commercecartcontainer cart-container">
 								<div class="w-commerce-commercecartheader cart-header">
 									<h4 class="w-commerce-commercecartheading">我的購物車</h4>
-									<a href="http://10.0.101.72:8080/cart" data-node-type="commerce-cart-close-link"
+									<a href="/cart" data-node-type="commerce-cart-close-link"
 										class="w-commerce-commercecartcloselink w-inline-block"
 										role="button" aria-label="Close cart"><svg width="16px"
 											height="16px" viewbox="0 0 16 16">

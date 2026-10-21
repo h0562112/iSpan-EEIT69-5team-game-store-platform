@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,7 @@ import com.ispan.eeit69.validator.UserValidator;
 
 @Controller
 public class HomeController {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	//private CustomUserDetailsService customUserDetailsService;
 	private UserService userService;
 	
@@ -51,6 +54,11 @@ public class HomeController {
 		return "login";
 	}
 
+	@GetMapping("/access-denied")
+	public String accessDenied() {
+		return "access-denied";
+	}
+
 	@GetMapping("/registersucessful")
 	public String rs(Model model) {
 		return "registersucessful";
@@ -69,8 +77,12 @@ public class HomeController {
 			return "register";
 		}
 		userService.save(user);	
-		//需開啟google2階段認證 等到大家都做好在開啟
-		emailService.sendRegistrationConfirmation(user.getEmail(), user.getUsername());
+		// 寄信失敗 (例如尚未設定 Gmail 帳密) 不應影響註冊成功
+		try {
+			emailService.sendRegistrationConfirmation(user.getEmail(), user.getUsername());
+		} catch (Exception e) {
+			logger.warn("註冊確認信寄送失敗: {}", e.getMessage());
+		}
 	    return "redirect:/registersucessful";
 	}
     @GetMapping("/forgotPassword")

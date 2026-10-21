@@ -112,7 +112,6 @@ public class ItemController {
 		if (myUser != null) {
 			currentUserId = String.valueOf(myUser.getId());
 		}
-		System.out.println(currentUserId);
 		// 將所有獲取到的數據添加到 model 對象中
 		model.addAttribute("currentUserId",currentUserId);
 		model.addAttribute("newReview", new Review());
@@ -144,7 +143,6 @@ public class ItemController {
 		if (myUser != null) {
 			// 使用myUser的ID
 			newReview.setUserId(myUser);
-			System.out.println("Debug: myUser after setting = " + myUser);
 		}
 
 		// 保存 Review 對象
@@ -235,8 +233,15 @@ public class ItemController {
         return ResponseEntity.ok(response);
     }
     
+	/** 只有評論的作者本人可以修改或刪除 */
+	private boolean isOwner(Review review, HttpSession session) {
+		User me = (User) session.getAttribute("myUser");
+		return me != null && review.getUserId() != null && review.getUserId().getId() == me.getId();
+	}
+
 	@PutMapping("/reviews2/{id}")
-    public ResponseEntity<Review> updateReview(@PathVariable Integer id, @RequestBody Review review) {
+    public ResponseEntity<Review> updateReview(@PathVariable Integer id, @RequestBody Review review,
+            HttpSession session) {
 
     	
         Optional<Review> existingReviewOpt = reviewRepository.findById(id);
@@ -245,6 +250,9 @@ public class ItemController {
         }
 
         Review existingReview = existingReviewOpt.get();
+        if (!isOwner(existingReview, session)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
         existingReview.setReviewText(review.getReviewText());
         existingReview.setRating(review.getRating());
         
@@ -254,13 +262,15 @@ public class ItemController {
         return new ResponseEntity<>(updatedReview, HttpStatus.OK);
     }
     @DeleteMapping("/api/reviews/{id}")
-    public ResponseEntity<?> deleteReview(@PathVariable Integer id) {
-        // 先檢查該評論是否存在
-
-        if (!reviewRepository.existsById(id)) {
+    public ResponseEntity<?> deleteReview(@PathVariable Integer id, HttpSession session) {
+        Optional<Review> review = reviewRepository.findById(id);
+        if (!review.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        
+        if (!isOwner(review.get(), session)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         reviewRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
