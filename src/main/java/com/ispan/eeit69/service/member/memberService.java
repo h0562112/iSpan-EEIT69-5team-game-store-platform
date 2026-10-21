@@ -7,7 +7,6 @@ import com.ispan.eeit69.model.Employee;
 import com.ispan.eeit69.model.FriendsMessages;
 import com.ispan.eeit69.model.Item;
 import com.ispan.eeit69.model.User;
-import com.ispan.eeit69.model.player_Games_library;
 
 public interface memberService {
 	void resetEmployeeTable();
@@ -28,12 +27,10 @@ public interface memberService {
 	
 	void deleteById(Integer id);
 	Employee findByname(String name);
-	List<player_Games_library> findplayergaAll();
 	List<Object[]> findByfriendsid(Integer id);
 	List<Object[]> findByfriendsidNew(Integer id);
 	List<Object[]> findByPlayerGameId(Integer id);
 	Item findBygameId(Integer id);
-	List<FriendsMessages> findByfriendmessages();
 	List<FriendsMessages> findByfriendmessages(Integer senderUserid, Integer receiverUserid);
 	List<Object[]> findByuserAllavatar();
 	List<Avatar> findAvatarAll();

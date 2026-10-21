@@ -1,6 +1,5 @@
 package com.ispan.eeit69.dao.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -162,7 +161,6 @@ public class memberDaoImpl implements memberDao {
 	    return result;
 	}
 
-
 	@Override
 	public void deleteById(Integer id) {
 //		String hql = "DELETE FROM Employee e WHERE e.id = :id";
@@ -176,15 +174,6 @@ public class memberDaoImpl implements memberDao {
 		             .executeUpdate();
 	}
 
-	@Override
-	public List<player_Games_library> findplayergaAll() {
-
-		
-		String hql = "FROM player_Games_library";
-		List<player_Games_library>  test = entityManager.createQuery(hql, player_Games_library.class)
-				                                 .getResultList();
-		return test;
-	}
 	
 //	@SuppressWarnings("unchecked")
 //	@Override
@@ -212,7 +201,6 @@ public class memberDaoImpl implements memberDao {
 	            .setParameter("eid", id)
 	            .getResultList();
 	}
-
 
 	
 	@SuppressWarnings("unchecked")
@@ -266,10 +254,5 @@ public class memberDaoImpl implements memberDao {
 	    return friendsMessages; // 返回查询结果列表
 	}
 
-	@Override
-	public void updateUsertable(User user, String base64Image) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

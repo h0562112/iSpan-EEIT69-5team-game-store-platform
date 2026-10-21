@@ -12,7 +12,6 @@ import com.ispan.eeit69.model.Employee;
 import com.ispan.eeit69.model.FriendsMessages;
 import com.ispan.eeit69.model.Item;
 import com.ispan.eeit69.model.User;
-import com.ispan.eeit69.model.player_Games_library;
 import com.ispan.eeit69.repository.memberRepository.AvatarRepository;
 import com.ispan.eeit69.service.member.memberService;
 
@@ -105,11 +104,6 @@ public class memberServiceImpl implements memberService {
 	}
 
 	@Override
-	public List<player_Games_library> findplayergaAll() {
-		return employeeDao.findplayergaAll();
-	}
-
-	@Override
 	public List<Object[]> findByfriendsid(Integer id) {
 		 return employeeDao.findByfriendsid(id);
 	}
@@ -134,9 +128,4 @@ public class memberServiceImpl implements memberService {
 		return employeeDao.findByfriendmessages(senderUserid,receiverUserid);
 	}
 
-	@Override
-	public List<FriendsMessages> findByfriendmessages() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
